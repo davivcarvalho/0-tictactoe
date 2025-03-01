@@ -2,7 +2,7 @@
 Tic Tac Toe Player
 """
 
-import math
+import math, copy
 
 X = "X"
 O = "O"
@@ -56,7 +56,7 @@ def result(board, action):
     if action not in actions(board):
         raise ValueError('Invalid action!')
     
-    new_board = board.copy()
+    new_board = copy.deepcopy(board)
     new_board[action[0]][action[1]] = player(board)
     
     return new_board
@@ -66,36 +66,37 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
+
     # chech if row 0 has tree same value
-    if board[0][0] == board[0][1] and board[0][1] == board[0][2]:
+    if board[0][0] != EMPTY and board[0][0] == board[0][1] == board[0][2]:
         return board[0][0]
 
     # chech if row 1 has tree same value
-    if board[1][0] == board[1][1] and board[1][1] == board[1][2]:
+    if board[1][0] != EMPTY and board[1][0] == board[1][1] == board[1][2]:
         return board[1][0]
 
     # chech if row 2 has tree same value
-    if board[2][0] == board[2][1] and board[2][1] == board[2][2]:
+    if board[2][0] != EMPTY and board[2][0] == board[2][1] == board[2][2]:
         return board[2][0]
 
     # chech if col 0 has tree same value
-    if board[0][0] == board[1][0] and board[1][0] == board[2][0]:
+    if board[0][0] != EMPTY and board[0][0] == board[1][0] == board[2][0]:
         return board[0][0]
     
     # chech if col 1 has tree same value
-    if board[0][1] == board[1][1] and board[1][1] == board[2][1]:
+    if board[0][1] != EMPTY and board[0][1] == board[1][1] == board[2][1]:
         return board[0][1]
 
     # chech if col 2 has tree same value
-    if board[0][2] == board[1][2] and board[1][2] == board[2][2]:
+    if board[0][2] != EMPTY and board[0][2] == board[1][2] == board[2][2]:
         return board[0][2]
 
     # check if letf to right diagonally has tree same value
-    if board[0][0] == board[1][1] and board[1][1] == board[2][2]:
+    if board[0][0] != EMPTY and board[0][0] == board[1][1] == board[2][2]:
         return board[0][0]
 
     # check if right to left diagonally has tree same value
-    if board[0][2] == board[1][1] and board[1][1] == board[2][0]:
+    if board[0][2] != EMPTY and board[0][2] == board[1][1] == board[2][0]:
         return board[0][2]
 
     return None
